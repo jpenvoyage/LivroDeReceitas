@@ -8,14 +8,23 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @ObservedObject var model = RecipeModel()
+    
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+            List(model.recipes) { r in
+                VStack(alignment: .leading) {
+                    Text(r.name)
+                        .font(.title)
+                    
+                        Text(r.cuisine)
+                }
+            }
+            Button("Add Recipe") {
+                model.addRecipe()
+            }
         }
-        .padding()
     }
 }
 
